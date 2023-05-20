@@ -1,0 +1,16 @@
+{
+    "name": "JZTreeViewerSamples",
+    "rootNamespace": "JZ.TreeViewer.Samples",
+    "references": [
+        "GUID:e1504c97b90bb334f89ec78e6f5104b6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
