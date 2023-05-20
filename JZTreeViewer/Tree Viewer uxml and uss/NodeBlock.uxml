@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="project://database/Assets/Tree%20Viewer/JZTreeViewer/Tree%20Viewer%20uxml%20and%20uss/Tree%20Viewer%20Tool%20Style.uss?fileID=7433441132597879392&amp;guid=bd8c77bc8d611394e8dd6a4c2f13b0c7&amp;type=3#Tree Viewer Tool Style" />
+    <ui:VisualElement name="node" class="state-block inactive-state">
+        <ui:Label text="Sample Node" display-tooltip-when-elided="true" name="node-name" class="body-text" style="font-size: 15px; -unity-font-style: bold; -unity-text-align: middle-center;" />
+        <ui:Button text="Hide" display-tooltip-when-elided="true" name="show-child" style="position: absolute; align-items: center; bottom: -30px; width: 45px;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement name="container" style="width: 100%; height: 100%; align-items: center; justify-content: center;">
+        <JZ.Common.PanAndZoomView name="block-container" style="background-color: rgb(41, 41, 41);" />
+        <ui:Label text="Tree Name" display-tooltip-when-elided="true" name="tree-name" class="header" style="-unity-font-style: bold; -unity-text-align: upper-center; width: 100%; height: 60px; font-size: 50px; color: rgb(233, 233, 233); background-color: rgb(0, 0, 0); position: absolute; top: 20px;" />
+        <uie:Toolbar name="Toolbar" style="position: absolute; left: 0; top: 0; right: 0; height: 20px; width: 100%;">
+            <uie:ToolbarButton text="Settings" display-tooltip-when-elided="true" name="settings-button" />
+            <uie:ToolbarMenu display-tooltip-when-elided="true" text="Layouts" name="save-menu" tooltip="Saving and deleting new default views." style="margin-left: -2px;" />
+            <uie:ToolbarMenu display-tooltip-when-elided="true" text="View Options" name="view-menu" />
+        </uie:Toolbar>
+        <ui:VisualElement name="settings-menu" style="position: absolute; top: 85px; background-color: rgb(26, 26, 26); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-top-left-radius: 5px; border-bottom-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; left: 10px; width: 250px; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
+            <ui:Label text="Branch View" display-tooltip-when-elided="true" name="position-settings" class="settings-header" style="margin-top: 0;" />
+            <JZ.Common.Editor.JZFloatSetting name="x-gap" label="X-Gap" value="400" prefs-key="TV-XGap" max-value="1000" />
+            <JZ.Common.Editor.JZFloatSetting name="y-gap" label="Y-Gap" value="100" prefs-key="TV-YGap" max-value="1000" />
+            <JZ.Common.Editor.JZToggleSetting name="show-active-node" value="true" label="Can&apos;t Hide Active Node" prefs-key="TV-ShowActive" />
+            <ui:Label text="Branch Lines" display-tooltip-when-elided="true" name="branch-line-settings" class="settings-header" />
+            <JZ.Common.Editor.JZColorSetting name="inactive-line-color" label="Inactive Line Color" value="#FFFFFFFF" prefs-key="TV-InactiveColor" />
+            <JZ.Common.Editor.JZColorSetting name="active-line-color" label="Active Line Color" value="#FF00FFFF" prefs-key="TV-ActiveColor" />
+            <JZ.Common.Editor.JZFloatSetting name="line-thickness" label="Line Thickness" value="3" prefs-key="TV-LineThickness" max-value="10" />
+            <ui:Button text="Reset Settings" display-tooltip-when-elided="true" name="reset-settings-button" />
+        </ui:VisualElement>
+        <ui:ListView focusable="true" name="transition-log" show-border="true" show-foldout-header="true" header-title="Node History Log" show-alternating-row-backgrounds="All" fixed-item-height="15" show-bound-collection-size="false" style="position: absolute; top: 80px; width: 212px; flex-grow: 1; right: 0; background-color: rgb(46, 46, 46); max-height: 175px;" />
+        <uie:IntegerField value="10" name="max-log-count" tooltip="Max elements allowed in log" style="position: absolute; right: 0; top: 80px; width: 43px;" />
+    </ui:VisualElement>
+</ui:UXML>

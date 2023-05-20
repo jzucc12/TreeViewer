@@ -1,0 +1,19 @@
+{
+    "name": "TreeViewer_Editor",
+    "rootNamespace": "JZ.TreeViewer.Editor",
+    "references": [
+        "GUID:e1504c97b90bb334f89ec78e6f5104b6",
+        "GUID:478a2357cc57436488a56e564b08d223",
+        "GUID:2473041cdd2e0b64a981b244c026b317",
+        "GUID:16ac3dcece4e43047a1f06dfec8e9960"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

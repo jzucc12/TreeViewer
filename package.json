@@ -1,0 +1,38 @@
+{
+    "name": "com.jzucc12.treeviewer",
+    "version": "1.0.0",
+    "displayName": "Tree Viewer",
+    "description": "A tool for viewing tree-like systems, such as behavior trees and hierarchal state machines.",
+    "unity": "2021.3",
+    "unityRelease": "21f1",
+    "documentationUrl": "TBD",
+    "changelogUrl": "TBD",
+    "licensesUrl": "TBD",
+    "dependencies": {
+      "com.unity.nuget.newtonsoft-json": "3.0.2",
+      "com.unity.editorcoroutines": "1.0.0"
+   },
+   "keywords": [
+      "tree",
+      "viewer",
+      "state machine"
+    ],
+    "samples": [
+      {
+        "displayName": "URP",
+        "description": "Contains example implementations using URP assets.",
+        "path": "Samples~/URP"
+      }
+    ],
+    "repository": 
+    { 
+      "type": "git", 
+      "url": "https://github.com/jzucc12/TreeViewer.git", 
+      "directory": "com.jzucc12.treeviewer" 
+    },
+    "author": {
+      "name": "Jeremy Zuccarello",
+      "email": "jzucc12@gmail.com",
+      "url": "https://www.jeremyzuccarello.com/"
+    }
+  }
