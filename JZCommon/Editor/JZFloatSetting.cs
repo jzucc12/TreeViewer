@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 
-#if UNITY_EDITOR
 namespace JZ.Common.Editor
 {
-    using UnityEditor.UIElements;
     
     /// <summary>
     /// Editor tool float settings
@@ -76,4 +75,3 @@ namespace JZ.Common.Editor
         }
     }
 }
-#endif

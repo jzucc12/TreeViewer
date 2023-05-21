@@ -4,7 +4,6 @@ using JZ.Common;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace JZ.TreeViewer.Editor
 {
     /// <summary>
@@ -264,4 +263,3 @@ namespace JZ.TreeViewer.Editor
         #endregion
     }
 }
-#endif

@@ -1,7 +1,6 @@
 using System;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace JZ.Common.Editor
 {
     /// <summary>
@@ -22,4 +21,3 @@ namespace JZ.Common.Editor
         }
     }
 }
-#endif

@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using JZ.Common.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using JZ.Common.Editor;
 
 
-#if UNITY_EDITOR
 namespace JZ.TreeViewer.Editor
 {
     /// <summary>
@@ -109,4 +108,3 @@ namespace JZ.TreeViewer.Editor
         showActive
     }
 }
-#endif

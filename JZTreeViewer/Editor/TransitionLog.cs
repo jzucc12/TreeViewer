@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
+using UnityEditor.UIElements;
 
-#if UNITY_EDITOR
 namespace JZ.TreeViewer.Editor
 {
-    using UnityEditor.UIElements;
 
     /// <summary>
     /// Keeps track of active node history of the currently shown tree view
@@ -118,4 +117,3 @@ namespace JZ.TreeViewer.Editor
         }
     }
 }
-#endif

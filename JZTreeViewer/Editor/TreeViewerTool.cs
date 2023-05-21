@@ -8,12 +8,12 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Collections;
+using UnityEditor.UIElements;
+using Unity.EditorCoroutines.Editor;
 
-#if UNITY_EDITOR
+
 namespace JZ.TreeViewer.Editor
 {
-    using UnityEditor.UIElements;
-    using Unity.EditorCoroutines.Editor;
 
     /// <summary>
     /// Displays a tree system, their branches, and which nodes are currently active
@@ -357,4 +357,3 @@ namespace JZ.TreeViewer.Editor
         #endregion
     }
 }
-#endif

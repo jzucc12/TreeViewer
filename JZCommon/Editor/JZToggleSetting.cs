@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-#if UNITY_EDITOR
 namespace JZ.Common.Editor
 {
     /// <summary>
@@ -62,4 +61,3 @@ namespace JZ.Common.Editor
         }
     }
 }
-#endif

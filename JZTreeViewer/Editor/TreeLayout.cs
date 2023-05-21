@@ -4,7 +4,6 @@ using JZ.Common;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-#if UNITY_EDITOR
 namespace JZ.TreeViewer.Editor
 {
     /// <summary>
@@ -51,4 +50,3 @@ namespace JZ.TreeViewer.Editor
         }
     }
 }
-#endif

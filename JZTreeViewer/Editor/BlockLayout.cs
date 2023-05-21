@@ -1,6 +1,5 @@
 using System;
 
-#if UNITY_EDITOR
 namespace JZ.TreeViewer.Editor
 {
     /// <summary>
@@ -23,4 +22,3 @@ namespace JZ.TreeViewer.Editor
         }
     }
 }
-#endif
