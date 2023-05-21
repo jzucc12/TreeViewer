@@ -19,14 +19,9 @@
     ],
     "samples": [
       {
-        "displayName": "Built-in RP",
-        "description": "Contains example implementations using the built-in RP.",
-        "path": "Samples~/Built-in RP"
-      },
-      {
-        "displayName": "URP",
-        "description": "Contains example implementations using URP assets.",
-        "path": "Samples~/URP"
+        "displayName": "Implementations",
+        "description": "Contains example implementations of the tree viewer.",
+        "path": "Samples~"
       }
     ],
     "repository": 
