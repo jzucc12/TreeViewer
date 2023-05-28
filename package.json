@@ -19,9 +19,19 @@
     ],
     "samples": [
       {
-        "displayName": "Implementations",
-        "description": "Contains example implementations of the tree viewer.",
-        "path": "Samples~"
+        "displayName": "Hierarchal State Machine (Character Controller)",
+        "description": "Contains hierarchal state machine example.",
+        "path": "Samples~/HSM"
+      },
+      {
+        "displayName": "Dialogue Tree",
+        "description": "Contains dialogue tree example.",
+        "path": "Samples~/Dialogue Tree"
+      },
+      {
+        "displayName": "UI State",
+        "description": "Contains UI example.",
+        "path": "Samples~/UI State"
       }
     ],
     "repository": 
