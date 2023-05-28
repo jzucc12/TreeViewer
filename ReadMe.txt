@@ -16,9 +16,7 @@ This package contains all necessary files to use the tool as well as some sample
 // LAYOUTS ////////////////////////////////////////////////
 The default view for the Tree is not a one size fits all. Blocks could overlap, or you may not like the default view for that Tree. 
 That's why you can hide child nodes, drag blocks around, and save these changes in the Layouts menu in the Tree Viewer toolbar.
-
-Saved layouts are unique to the Tree type but not the Tree instance. This is best illustrated in the "Character Controller Scene" sample. 
-In this scene there are two proximity sensor Trees. If you save a new layout for one proximity sensor, it will apply to both of them and any future instance of that Tree type.
+Saved layouts are unique to the Tree type but not the Tree instance. This is best illustrated in the "Hierachal State Machine" sample. 
 
 // SETTINGS AND MORE //////////////////////////////////////
 The Tree Viewer toolbar has a settings menu for you to customize the look of your window. These changes are instantly saved and are constant across all Trees.

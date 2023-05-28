@@ -106,7 +106,7 @@ namespace JZ.TreeViewer.Editor
             if(rootBlock != null && rootBlock.IsNodeDirty())
             {
                 UpdateAllBlocks();
-                transitionLog.AddEntry(rootBlock.FindDeepestActive());
+                transitionLog.AddEntry(rootBlock.FindNewActive());
             }
         }
 

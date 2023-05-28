@@ -231,16 +231,19 @@ namespace JZ.TreeViewer.Editor
         }
 
         // Used by the node history log to record the new active node
-        /// <returns>The deepest active node in relation to this one</returns>
-        public string FindDeepestActive()
+        /// <returns>The deepest active node that is dirty in relation to this one</returns>
+        public string FindNewActive()
         {
-            if(!myNode.IsActive) return "I'm not active";
+            if(!myNode.IsActive) 
+            {
+                return "I'm not active";
+            }
 
             foreach(TNodeBlock child in childBlocks)
             {
-                if(child.myNode.IsActive)
+                if(child.myNode.IsActive && child.IsNodeDirty())
                 {
-                    return child.FindDeepestActive();
+                    return child.FindNewActive();
                 }
             }
 
