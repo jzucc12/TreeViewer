@@ -13,7 +13,7 @@ namespace JZ.TreeViewer.Samples
         [SerializeField] private Text bannerText;
         [SerializeField] private Button optionButtonPrefab;
 
-        const string dialogueName = "Product Review \"Survey\"";
+        const string dialogueName = "Find your way home";
         private List<DialogueOption> allOptions;
         private DialogueOption activeOption;
         private DialogueOption start;
@@ -23,65 +23,64 @@ namespace JZ.TreeViewer.Samples
         private void Awake()
         {
             allOptions = new List<DialogueOption>();
-            start = new DialogueOption("Start", "What do you think of this package so far?");
+            start = new DialogueOption("Start", "You are trying to get home after getting lost in the woods. You are currently going north.");
             AddOption(start);
 
             //First major branch
-            var amazing = new DialogueOption("Amazing", "Amazing, I love it!", "Happy to hear it! What's your favorite part?");
-            AddOption(amazing, start);
+            var west = new DialogueOption("West", "I go west instead", "You eventually find a river. The water is moving south.");
+            AddOption(west, start);
             {
-                var all = new DialogueOption("All", "All of it. So great!", "That's great! Well, have a good one!");
-                AddOption(all, amazing);
+                var upstream = new DialogueOption("Upstream", "I follow the river upstream", "You keep walking but never find your way home.");
+                AddOption(upstream, west);
 
-                var convenience = new DialogueOption("Convenience", "The convenience it provides.", "Well that was the point. So good to hear.");
-                AddOption(convenience, amazing);
+                var downstream = new DialogueOption("Downstream", "I follow the river downstream", "After a couple hours, you find your way home.");
+                AddOption(downstream, west);
+
+                var across = new DialogueOption("Across", "I walk across the river", "You lose your footing and get caught in the flow.");
+                AddOption(across, west);
                 {
-                    var pointMade = new DialogueOption("Made", "Point well made then.", "Thanks. Happy using!");
-                    AddOption(pointMade, convenience);
-                }
+                    var accept = new DialogueOption("Accept", "Accept it and ride downstream", "After riding for awhile, it eventually leads you home.");
+                    AddOption(accept, across);
 
-
-                var samples = new DialogueOption("Samples", "The samples obviously.","....Which one is your favorite?");
-                AddOption(samples, amazing);
-                {
-                    var ui = new DialogueOption("UI", "The UI one.", "That one? Really? We're done here.");
-                    AddOption(ui, samples);
-
-                    var hsm = new DialogueOption("HSM", "The hierarchal state machine.", "Of course you'd pick that one... Get outta here!");
-                    AddOption(hsm, samples);
-
-                    var thisOne = new DialogueOption("This one", "This one of course!", "Aw shucks. Don't tell the others, but you're my favorite user");
-                    AddOption(thisOne,samples);
-                    {
-                        var kind = new DialogueOption("Kind", "You're too kind. I bet you say that to all the users.", "If they go down this path, yes I do.");
-                        AddOption(kind, thisOne);
-                    }
+                    var fight = new DialogueOption("Fight", "Fight it and climb across", "You make it across the river and continue your journey, but you never find your way home.");
+                    AddOption(fight, across);
                 }
             }
             
             //Second major branch
-            var okay = new DialogueOption("Okay", "It's okay.", "I guess I'll that over bad. Well bye then.");
-            AddOption(okay, start);
+            var north = new DialogueOption("North", "I continue north", "You walk for awhile until you fall into a pit trap. There is no escape.");
+            AddOption(north, start);
 
-            //Last major branch
-            var notAFan = new DialogueOption("Not a fan", "Can't say I'm a fan.", "...It's not the samples, is it?");
-            AddOption(notAFan, start);
+            //Third major branch
+            var east = new DialogueOption("East", "I get east instead", "It opens to a field with wild horses.");
+            AddOption(east, start);
             {
-                var no = new DialogueOption("Not samples", "No, not them. It's just not for me.", "That was close... Fair enough though. Thanks for the honesty.");
-                AddOption(no, notAFan);
+                var leave = new DialogueOption("Leave", "Leave them be and continue on my way", "You continue, but you never get home.");
+                AddOption(leave, east);
 
-                var yes = new DialogueOption("Yes", "...It is","...Is it me?");
-                AddOption(yes, notAFan);
+                var tame = new DialogueOption("Tame", "I try to tame one", "The white horse, brown horse, or tan horse?");
+                AddOption(tame, east);
                 {
-                    var ui = new DialogueOption("UI", "No, it's the UI one", "Yeah! Take that UI one!");
-                    AddOption(ui, yes);
+                    var white = new DialogueOption("White", "The white horse", "The white horse panics and kicks you in the head. You don't wake up.");
+                    AddOption(white, tame);
 
-                    var hsm = new DialogueOption("HSM", "It's the hierarchal state machine actually", "I Wasn't expecting that, but I'll take it.");
-                    AddOption(hsm, yes);
+                    var brown = new DialogueOption("Brown", "The brown horse", "You get on the brown horse, but you can't control it. It runs wildly through the woods. You don't get home.");
+                    AddOption(brown, tame);
 
-                    var itsYou = new DialogueOption("It's you", "Yes, it's you...", ":(");
-                    AddOption(itsYou,yes);
+                    var tan = new DialogueOption("Tan", "The tan horse", "You successfully get on the tan horse. It calmly starts travelling south.");
+                    AddOption(tan, tame);
+                    {
+                        var let = new DialogueOption("Accept", "Let the horse go south", "The horse leads you home.");
+                        AddOption(let, tan);
+
+                        var resist = new DialogueOption("Resist", "Resist the horse and continue eastward", "The horse submits, but you never make it home.");
+                        AddOption(resist, tan);
+                    }
                 }
+
+                //Last major branch
+                var south = new DialogueOption("South", "I turn around and go south", "You make it home. Why were you going north?");
+                AddOption(south, start);
             }
 
             Reset();
