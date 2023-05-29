@@ -21,9 +21,10 @@ namespace JZ.TreeViewer.Editor
         private List<TNodeBlock> childBlocks = new List<TNodeBlock>();
         private Button childButton;
         private bool showingChildren = true;
+        private string blockName;
 
         #region //Set up
-        public TNodeBlock(ITreeNodeViewer myNode, TreeSettingManager settingManager)
+        public TNodeBlock(ITreeNodeViewer myNode, TreeSettingManager settingManager, int nameCount)
         {
             //Create tree and set up styles
             this.SetUxmlAndUss("Tree Viewer uxml and uss", "NodeBlock.uxml", "Tree Viewer Tool Style.uss");
@@ -38,7 +39,12 @@ namespace JZ.TreeViewer.Editor
             //Set up node parameters
             this.myNode = myNode;
             Label nodeName = this.Q<Label>("node-name");
-            nodeName.text = myNode.GetNodeName();
+            blockName = myNode.GetNodeName();
+            if(nameCount > 1)
+            {
+                blockName += $" {nameCount}";
+            }
+            nodeName.text = blockName;
 
             //Set up show/hide button
             childButton = this.Q<Button>("show-child");
@@ -247,7 +253,7 @@ namespace JZ.TreeViewer.Editor
                 }
             }
 
-            return myNode.GetNodeName();
+            return blockName;
         }
         #endregion
     

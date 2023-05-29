@@ -156,9 +156,11 @@ namespace JZ.TreeViewer.Editor
             //Set up new tree
             treeName.text = tree.GetTreeName();
             activeTree = tree;
+            List<string> currentNames = new List<string>();
             foreach(ITreeNodeViewer node in tree.GetAllNodes())
             {
-                TNodeBlock newBlock = new TNodeBlock(node, settingManager);
+                currentNames.Add(node.GetNodeName());
+                TNodeBlock newBlock = new TNodeBlock(node, settingManager, currentNames.Count((name) => name == node.GetNodeName()));
                 nodeBlocks.Add(node, newBlock);
                 blockContainer.AddElement(newBlock);
 

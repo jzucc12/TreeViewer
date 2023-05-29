@@ -11,7 +11,7 @@ namespace JZ.TreeViewer
         /// <returns>Name of the node</returns>
         string GetNodeName(); 
 
-        /// <returns>True if the node or any of its children have changed in anyway</returns>
+        /// <returns>If thise node has changed in anyway. Change should propogate up to the root node/returns>
         bool IsNodeDirty();
 
         /// <param name="node">potential parent node</param>

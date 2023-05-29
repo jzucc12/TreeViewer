@@ -11,7 +11,7 @@ namespace JZ.TreeViewer
         /// <returns>The tree's name</returns>
         string GetTreeName();
 
-        /// <returns>All nodes within the tree</returns>
+        /// <returns>All nodes within the tree. First node returned must be the root node</returns>
         IEnumerable<ITreeNodeViewer> GetAllNodes();
     }
 }

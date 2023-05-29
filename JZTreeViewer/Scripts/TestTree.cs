@@ -21,20 +21,20 @@ namespace JZ.TreeViewer
             this.treeName = smName;
 
             rootNode = CreateNode("Test");
-            var test2 = CreateNode("Test 2", rootNode);
-            var test3 = CreateNode("Test 3", rootNode);
-            var test4 = CreateNode("Test 4", rootNode);
-            var test5 = CreateNode("Test 5", test2);
-            var test6 = CreateNode("Test 6", test2);
-            var test7 = CreateNode("Test 7", test6);
-            var test8 = CreateNode("Test 8", test3);
-            var test9 = CreateNode("Test 9", test8);
-            var test10 = CreateNode("Test 10", test8);
-            var test11 = CreateNode("Test 11", test3);
-            var test12 = CreateNode("Test 12", test4);
-            var test13 = CreateNode("Test 13", test4);
-            var test14 = CreateNode("Test 14", test13);
-            var test15 = CreateNode("Test 15", test14);
+            var test2 = CreateNode("Test", rootNode);
+            var test3 = CreateNode("Test", rootNode);
+            var test4 = CreateNode("Test", rootNode);
+            var test5 = CreateNode("Test", test2);
+            var test6 = CreateNode("Test", test2);
+            var test7 = CreateNode("Test", test6);
+            var test8 = CreateNode("Test", test3);
+            var test9 = CreateNode("Test", test8);
+            var test10 = CreateNode("Test", test8);
+            var test11 = CreateNode("Test", test3);
+            var test12 = CreateNode("Test", test4);
+            var test13 = CreateNode("Test", test4);
+            var test14 = CreateNode("Test", test13);
+            var test15 = CreateNode("Test", test14);
             ChangeNode(test10);
 
             //For node transitioning
