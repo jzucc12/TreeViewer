@@ -5,11 +5,16 @@ Shader "Tree Viewer/Base"
             _Color ("Main Color", COLOR) = (1,1,1,1)
         }
         SubShader {
+            Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
+        
+            ZWrite Off
+            Lighting Off
+            Fog { Mode Off }
+
+            Blend SrcAlpha OneMinusSrcAlpha 
+
             Pass {
-                Material {
-                    Diffuse [_Color]
-                }
-                Lighting Off
+                Color [_Color]
             }
         }
 }
