@@ -24,6 +24,11 @@
         "path": "Samples~/HSM"
       },
       {
+        "displayName": "Behavior Tree (AI Controller)",
+        "description": "Contains beahvior tree example.",
+        "path": "Samples~/Behavior Tree"
+      },
+      {
         "displayName": "Dialogue Tree",
         "description": "Contains dialogue tree example.",
         "path": "Samples~/Dialogue Tree"
