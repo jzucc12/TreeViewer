@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Moves AI to the target position
+    /// </summary>
     public class MoveToNode : LeafNode
     {
         Transform target;
@@ -18,7 +21,7 @@ namespace JZ.TreeViewer.Samples
             base.FixedTick();
             if(owner.MoveTowards(target, tolerance))
             {
-                ChangeStatus(Status.SUCCESS);
+                ChangeStatus(NodeStatus.SUCCESS);
             }
         }
     }

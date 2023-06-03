@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Behavior tree object. Tree viewable in play mode only.
+    /// </summary>
     public class BehaviorTree : MonoBehaviour, ITreeViewer
     {
         [SerializeField] private float moveSpeed;
@@ -16,12 +19,12 @@ namespace JZ.TreeViewer.Samples
 
         private void Awake()
         {
-            var detect = new SelectorNode("Detect", this);
+            var detect = new PriorityNode("Detect", this);
             root = new RepeaterNode("Root", this, detect);
 
             var found = new SequenceNode("Found", this);
             {
-                var wait = new WaitForNode("Wait", this, 0.3f);
+                var wait = new WaitForNode("Wait to Chase", this, 0.3f);
                 found.AddChild(wait);
                 var chase = new MoveToNode("Chase", this, player, 0f);
                 var chaseLoop = new RepeaterNode("Chase Loop", this, chase);
@@ -59,6 +62,8 @@ namespace JZ.TreeViewer.Samples
             root.FixedTick();
         }
 
+        #region //AI functions
+        /// <returns>True if the AI's rotation is facing the target enough</returns>
         public bool RotateTowards(Transform target, float tolerance)
         {
             Vector2 targetDirection = target.position - transform.position;
@@ -69,6 +74,7 @@ namespace JZ.TreeViewer.Samples
             return Vector3.Angle(transform.up, targetDirection) <= tolerance;
         }
 
+        /// <returns>True if the AI's position is close enough to its target</returns>
         public bool MoveTowards(Transform target, float tolerance)
         {
             RotateTowards(target, 0);
@@ -77,10 +83,12 @@ namespace JZ.TreeViewer.Samples
             return Vector2.Distance(target.position, transform.position) <= tolerance;
         }
 
+        /// <returns>True if the AI is close enough to the player</returns>
         private bool InRange()
         {
             return Vector2.Distance(player.position, transform.position) <= chaseRange;
         }
+        #endregion
 
         #region //Interface specific
         public IEnumerable<ITreeNodeViewer> GetAllNodes()

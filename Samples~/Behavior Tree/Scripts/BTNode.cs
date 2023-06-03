@@ -1,19 +1,21 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Base node for the behavior tree
+    /// </summary>
     public abstract class BTNode : ITreeNodeViewer
     {
         public bool IsActive { get; private set; }
-        public event Action<Status> OnStatusChange;
+        public event Action<NodeStatus> OnStatusChange;
         public BTNode parent;
         protected BehaviorTree owner;
         private string nodeName;
-        private Status myStatus;
+        private NodeStatus myStatus;
         private bool activeChanged = false;
-        public Func<bool> enterTest { get; private set; }
+        private Func<bool> enterTest;
 
 
         public BTNode(string nodeName, BehaviorTree owner)
@@ -22,9 +24,13 @@ namespace JZ.TreeViewer.Samples
             this.nodeName = nodeName;
         }
 
+        public virtual void NodeTick() { }
+        public virtual void FixedTick() { } 
+
+        #region //Entering and exiting
         public void EnterNode()
         {
-            ChangeStatus(Status.RUNNING);
+            ChangeStatus(NodeStatus.RUNNING);
             MakeDirty();
             IsActive = true;
             OnEnterNode();
@@ -36,36 +42,19 @@ namespace JZ.TreeViewer.Samples
             IsActive = false;
             OnExitNode();
         }
-
         public abstract void OnEnterNode();
         public abstract void OnExitNode();
 
-        public virtual void NodeTick()
-        {
-
-        }
-
-        public virtual void FixedTick()
-        {
-
-        }
-
-        public virtual void ResetNode()
-        {
-
-        }
-
-        protected void ChangeStatus(Status newStatus)
-        {
-            myStatus = newStatus;
-            OnStatusChange?.Invoke(newStatus);
-        }
-
+        /// <summary>
+        /// Condition for this node to be entered.
+        /// </summary>
+        /// <param name="test"></param>
         public void ChangeEnterCondition(Func<bool> test)
         {
             enterTest = test;
         }
 
+        /// <returns>If this node can be entered. Returns true if no enter condition was set</returns>
         public bool CanEnter()
         {
             if(enterTest == null)
@@ -77,6 +66,14 @@ namespace JZ.TreeViewer.Samples
                 return enterTest.Invoke();
             }
         }
+        #endregion
+
+        #region //Node state
+        protected void ChangeStatus(NodeStatus newStatus)
+        {
+            myStatus = newStatus;
+            OnStatusChange?.Invoke(newStatus);
+        }
 
         public abstract IEnumerable<BTNode> GetChildren();
 
@@ -85,6 +82,7 @@ namespace JZ.TreeViewer.Samples
             activeChanged = true;
             parent?.MakeDirty();
         }
+        #endregion
 
         #region //Interface specific
         public string GetNodeName()
@@ -104,12 +102,5 @@ namespace JZ.TreeViewer.Samples
             return didChange;
         }
         #endregion
-    }
-
-    public enum Status
-    {
-        SUCCESS,
-        RUNNING,
-        FAILED
     }
 }

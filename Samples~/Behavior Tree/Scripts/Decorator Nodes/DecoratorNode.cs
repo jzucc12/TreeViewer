@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Node that has a single child that it modifies.
+    /// </summary>
     public abstract class DecoratorNode : BTNode
     {
         protected BTNode child;
@@ -36,7 +39,7 @@ namespace JZ.TreeViewer.Samples
             child.FixedTick();
         }
 
-        protected abstract void OnChildStatusChange(Status childStatus);
+        protected abstract void OnChildStatusChange(NodeStatus childStatus);
 
         public override IEnumerable<BTNode> GetChildren()
         {

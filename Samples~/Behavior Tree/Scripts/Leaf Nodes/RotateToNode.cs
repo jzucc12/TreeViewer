@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Rotates the AI to face its target
+    /// </summary>
     public class RotateToNode : LeafNode
     {
         Transform target;
@@ -17,7 +20,7 @@ namespace JZ.TreeViewer.Samples
             base.FixedTick();
             if(owner.RotateTowards(target, tolerance))
             {
-                ChangeStatus(Status.SUCCESS);
+                ChangeStatus(NodeStatus.SUCCESS);
             }
         }
     }

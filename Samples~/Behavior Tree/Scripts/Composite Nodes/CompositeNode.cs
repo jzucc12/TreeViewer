@@ -1,8 +1,10 @@
-using System;
 using System.Collections.Generic;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Node that has multiple chldren
+    /// </summary>
     public abstract class CompositeNode : BTNode
     {
         protected List<BTNode> children = new List<BTNode>();
@@ -23,10 +25,11 @@ namespace JZ.TreeViewer.Samples
             activeChildIndex = 0;
         }
 
+        #region //From base node
         public override void OnEnterNode()
         {
             activeChildIndex = -1;
-            ChooseNextNode(Status.RUNNING);
+            ChooseNextNode(NodeStatus.RUNNING);
         }
 
         public override void OnExitNode()
@@ -46,30 +49,17 @@ namespace JZ.TreeViewer.Samples
             activeChild?.FixedTick();
         }
 
+        public override IEnumerable<BTNode> GetChildren()
+        {
+            return children;
+        }
+        #endregion
+
+        #region //Child nodes
         public void AddChild(BTNode child)
         {
             children.Add(child);
             child.parent = this;
-        }
-
-        private void OnChildStatusChange(Status childStatus)
-        {
-            if (childStatus == Status.RUNNING)
-            {
-                return;
-            }
-            ChooseNextNode(childStatus);
-        }
-
-        protected void ChooseNextNode(Status childStatus)
-        {
-            ExitChildNode();
-            int newIndex = GetNextIndex(childStatus);
-            if(newIndex != -1)
-            {
-                activeChildIndex = newIndex;
-                EnterChildNode();
-            }
         }
 
         protected void ExitChildNode()
@@ -89,12 +79,30 @@ namespace JZ.TreeViewer.Samples
                 activeChild.EnterNode();
             }
         }
+        #endregion
 
-        protected abstract int GetNextIndex(Status newStatus);
-
-        public override IEnumerable<BTNode> GetChildren()
+        #region //Choosing future child nodes to enter
+        private void OnChildStatusChange(NodeStatus childStatus)
         {
-            return children;
+            if (childStatus != NodeStatus.RUNNING)
+            {
+                ChooseNextNode(childStatus);
+            }
         }
+
+        protected void ChooseNextNode(NodeStatus childStatus)
+        {
+            ExitChildNode();
+            int newIndex = GetNextIndex(childStatus);
+            if(newIndex != -1)
+            {
+                activeChildIndex = newIndex;
+                EnterChildNode();
+            }
+        }
+
+        /// <returns>Next valid child node to enter</returns>
+        protected abstract int GetNextIndex(NodeStatus newStatus);
+        #endregion
     }
 }

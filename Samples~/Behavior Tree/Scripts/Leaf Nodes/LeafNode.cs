@@ -1,8 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Base node that usually interacts with the AI.
+    /// </summary>
     public abstract class LeafNode : BTNode
     {
         protected LeafNode(string nodeName, BehaviorTree owner) : base(nodeName, owner)

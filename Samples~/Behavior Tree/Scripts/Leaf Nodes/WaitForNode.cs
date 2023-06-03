@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace JZ.TreeViewer.Samples
 {
+    /// <summary>
+    /// Delays further actions for a given amount of time
+    /// </summary>
     public class WaitForNode : LeafNode
     {
         private float waitTime;
@@ -23,7 +26,7 @@ namespace JZ.TreeViewer.Samples
             currentTime += Time.deltaTime;
             if(currentTime >= waitTime)
             {
-                ChangeStatus(Status.SUCCESS);
+                ChangeStatus(NodeStatus.SUCCESS);
             }
         }
     }
