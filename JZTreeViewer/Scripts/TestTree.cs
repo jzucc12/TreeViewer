@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace JZ.TreeViewer
@@ -58,6 +59,11 @@ namespace JZ.TreeViewer
             activeNode = newNode;
             activeNode.ActivateNode();
         }
+
+        private void OnClick(MouseDownEvent evt)
+        {
+            ChangeNode(nodes[Random.Range(0, nodes.Count)]);
+        }
         #endregion
 
         #region //Interface specific
@@ -72,18 +78,6 @@ namespace JZ.TreeViewer
             {
                 yield return node;
             }
-        }
-        #endregion
-
-        #region //Node transitioning
-        private void OnClick(MouseDownEvent evt)
-        {
-            NextNode();
-        }
-
-        private void NextNode()
-        {
-            ChangeNode(rootNode.NextNode());
         }
         #endregion
     }

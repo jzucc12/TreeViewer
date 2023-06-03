@@ -70,35 +70,5 @@ namespace JZ.TreeViewer
             return dirty;
         }
         #endregion
-
-        #region //Node transitioning
-        public TestNode NextNode()
-        {
-            int index = children.FindIndex(x => x.IsActive);
-            TestNode nextChild;
-            if(index == children.Count - 1)
-            {
-                nextChild = children[0];
-            }
-            else
-            {
-                nextChild = children[index + 1];
-            }
-            return nextChild.GetRandomChild();
-        }
-
-        private TestNode GetRandomChild()
-        {
-            if(children.Count == 0)
-            {
-                return this;
-            }
-            else
-            {
-                int randomChildNo = UnityEngine.Random.Range(0, children.Count);
-                return children[randomChildNo].GetRandomChild();
-            }
-        }
-        #endregion
     }
 }

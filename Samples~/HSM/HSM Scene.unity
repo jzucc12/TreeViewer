@@ -518,9 +518,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3022840258756793328, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
+      propertyPath: hsmName
+      value: Left Sensor HSM
+      objectReference: {fileID: 0}
     - target: {fileID: 3022840258756793341, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
       propertyPath: m_Name
-      value: Proximity Sensor 1
+      value: Sensor 1 [CLICK ME AT RUNTIME]
       objectReference: {fileID: 0}
     - target: {fileID: 3022840258756793343, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
       propertyPath: m_RootOrder
@@ -932,7 +936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: b1c5ed1b9e72d0540b2806b67c9b01f9, type: 2}
   m_Color: {r: 0.07081401, g: 0.08902883, b: 0.2924528, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -940,7 +944,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d05fc438ba9d39f4b972548c6d662e8f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1352,9 +1356,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3022840258756793328, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
+      propertyPath: hsmName
+      value: Right Sensor HSM
+      objectReference: {fileID: 0}
     - target: {fileID: 3022840258756793341, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
       propertyPath: m_Name
-      value: Proximity Sensor 2
+      value: Sensor 2 [CLICK ME AT RUNTIME]
       objectReference: {fileID: 0}
     - target: {fileID: 3022840258756793343, guid: 13ca3b6837c2fec468a6de1de7a4bc99, type: 3}
       propertyPath: m_RootOrder
@@ -1455,7 +1463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3553342418338360379, guid: 7ce63a821cac66b4da5bb495ee93081c, type: 3}
       propertyPath: m_Name
-      value: Character
+      value: Character [CLICK ME AT RUNTIME]
       objectReference: {fileID: 0}
     - target: {fileID: 3553342418772139215, guid: 7ce63a821cac66b4da5bb495ee93081c, type: 3}
       propertyPath: m_SortingLayer

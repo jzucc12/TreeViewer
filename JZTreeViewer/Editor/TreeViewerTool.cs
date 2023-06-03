@@ -30,8 +30,8 @@ namespace JZ.TreeViewer.Editor
         private const string layoutKey = "Saved Tree Layouts";
         private ITreeViewer activeTree;
         private string treeTypeName => activeTree.GetType().ToString();
-        private TNodeBlock rootBlock;
-        private Dictionary<ITreeNodeViewer, TNodeBlock> nodeBlocks = new Dictionary<ITreeNodeViewer, TNodeBlock>();
+        private TNodeBlock rootBlock => TNodeBlock.currentRoot;
+        private List<TNodeBlock> nodeBlocks = new List<TNodeBlock>();
         public Dictionary<string, TreeLayout> savedLayouts = new Dictionary<string, TreeLayout>();
         private bool created = false;
 
@@ -53,7 +53,7 @@ namespace JZ.TreeViewer.Editor
                 EditorUtility.SetDirty(window);
             }
         }
-  
+
         private void CreateGUI()
         {
             try
@@ -85,7 +85,11 @@ namespace JZ.TreeViewer.Editor
         private IEnumerator DelayedSetUp()
         {
             yield return null;
-            ShowTestTree();
+            CheckSelection();
+            if(nodeBlocks.Count == 0)
+            {
+                ShowTestTree();
+            }
         }
         #endregion
 
@@ -110,12 +114,12 @@ namespace JZ.TreeViewer.Editor
             }
         }
 
-        #region //Creating the Node Diagram
-        private void ShowTestTree(DropdownMenuAction action)
+        private void OnFocus()
         {
-            ShowTestTree();
+            CheckSelection();
         }
-        
+
+        #region //Creating the Node Diagram
         private void ShowTestTree()
         {
             SetNewTree(new TestTree("Test Tree", blockContainer));
@@ -124,14 +128,22 @@ namespace JZ.TreeViewer.Editor
         // Called when clicking on an object in the editor
         private void OnSelectionChange()
         {
-            if(Selection.activeGameObject == null)
+            CheckSelection();
+        }
+
+        private void CheckSelection()
+        {
+            if (Selection.activeGameObject == null)
             {
                 return;
             }
 
-            if(Selection.activeGameObject.TryGetComponent<ITreeViewer>(out ITreeViewer tree))
+            if (Selection.activeGameObject.TryGetComponent<ITreeViewer>(out ITreeViewer tree))
             {
-                SetNewTree(tree);
+                if(tree != activeTree)
+                {
+                    SetNewTree(tree);
+                }
             }
         }
 
@@ -142,7 +154,8 @@ namespace JZ.TreeViewer.Editor
         private void SetNewTree(ITreeViewer tree)
         {
             //Safety check for trees that initialize in play mode
-            if(tree.GetAllNodes() == null)
+            IEnumerable<ITreeNodeViewer> nodes = tree.GetAllNodes();
+            if(nodes == null || nodes.Count() == 0)
             {
                 return;
             }
@@ -150,28 +163,34 @@ namespace JZ.TreeViewer.Editor
             //Reset State
             nodeBlocks.Clear();
             blockContainer.ClearElements();
-            rootBlock = null;
             transitionLog.ResetLog();
 
             //Set up new tree
-            treeName.text = tree.GetTreeName();
             activeTree = tree;
-            List<string> currentNames = new List<string>();
-            foreach(ITreeNodeViewer node in tree.GetAllNodes())
+            treeName.text = tree.GetTreeName();
+            foreach(ITreeNodeViewer node in nodes)
             {
-                currentNames.Add(node.GetNodeName());
-                TNodeBlock newBlock = new TNodeBlock(node, settingManager, currentNames.Count((name) => name == node.GetNodeName()));
-                nodeBlocks.Add(node, newBlock);
-                blockContainer.AddElement(newBlock);
-
-                if(rootBlock == null)
+                //Determine number of nodes and blocks that share this name
+                int nameCount = 0;
+                foreach(TNodeBlock block in nodeBlocks)
                 {
-                    rootBlock = newBlock;
+                    string post = nameCount > 0 ? $" {nameCount + 1}" : "";
+                    if(block.SharesNameWith(node.GetNodeName() + post))
+                    {
+                        nameCount++;
+                    }
                 }
-                else
+
+                //Create block
+                bool isRoot = nodeBlocks.Count == 0;
+                TNodeBlock newBlock = new TNodeBlock(node, settingManager, isRoot, nameCount);
+                blockContainer.AddElement(newBlock);
+                nodeBlocks.Add(newBlock);
+
+                //Set parent
+                if(!isRoot)
                 {
-                    newBlock.AddDragAndDrop();
-                    TNodeBlock parent = nodeBlocks.Where((pair) => node.IsChildOf(pair.Key)).First().Value;
+                    TNodeBlock parent = nodeBlocks.Where((block) => newBlock.IsChildOf(block)).First();
                     parent?.AddChildBlock(newBlock);
                 }
             }
@@ -194,7 +213,7 @@ namespace JZ.TreeViewer.Editor
         {
             if(savedLayouts.ContainsKey(treeTypeName))
             {
-                savedLayouts[treeTypeName].LoadLayout(blockContainer, nodeBlocks.Values.ToList());
+                savedLayouts[treeTypeName].LoadLayout(blockContainer, nodeBlocks);
             }
             else
             {
@@ -230,7 +249,7 @@ namespace JZ.TreeViewer.Editor
             saveMenu.menu.AppendAction("Delete All Layouts", DeleteAllLayouts);
 
             var viewMenu = rootVisualElement.Q<ToolbarMenu>("view-menu");
-            viewMenu.menu.AppendAction("Show Test Tree", ShowTestTree);
+            viewMenu.menu.AppendAction("Show Test Tree", (action) => ShowTestTree());
             viewMenu.menu.AppendAction("Show all nodes", ShowAllChildren);
             viewMenu.menu.AppendAction("Hide all nodes", HideAllChildren);
         }
@@ -258,7 +277,7 @@ namespace JZ.TreeViewer.Editor
         /// <param name="action"></param>
         private void ShowAllChildren(DropdownMenuAction action = null)
         {
-            foreach(TNodeBlock block in nodeBlocks.Values)
+            foreach(TNodeBlock block in nodeBlocks)
             {
                 block.SetShowButton(true);
             }
@@ -271,7 +290,7 @@ namespace JZ.TreeViewer.Editor
         /// <param name="action"></param>
         private void HideAllChildren(DropdownMenuAction action)
         {
-            foreach(TNodeBlock block in nodeBlocks.Values)
+            foreach(TNodeBlock block in nodeBlocks)
             {
                 block.SetShowButton(false);
             }
@@ -324,7 +343,7 @@ namespace JZ.TreeViewer.Editor
 
         private void LoadSavedLayout(DropdownMenuAction action)
         {
-            savedLayouts[treeTypeName].LoadLayout(blockContainer, nodeBlocks.Values.ToList());
+            savedLayouts[treeTypeName].LoadLayout(blockContainer, nodeBlocks);
             UpdateAllBlocks();
         }
 

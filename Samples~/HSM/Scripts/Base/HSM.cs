@@ -9,6 +9,7 @@ namespace JZ.TreeViewer.Samples
     /// </summary>
     public class HSM : MonoBehaviour, ITreeViewer
     {
+        [SerializeField] private string hsmName;
         public Animator animator;
         protected BaseState root;
         public event Action<StateEvent> OnStateEvent;
@@ -31,7 +32,7 @@ namespace JZ.TreeViewer.Samples
 
         public string GetTreeName()
         {
-            return name;
+            return hsmName;
         }
     }
 }

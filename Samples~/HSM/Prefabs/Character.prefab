@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a589daa1f8d1b84dbba99dc83274159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hsmName: Character HSM
   animator: {fileID: 3553342418772139213}
   playerBody: {fileID: 3553342418772139214}
   rb: {fileID: 3553342418338360376}

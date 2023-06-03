@@ -98,14 +98,21 @@ namespace JZ.TreeViewer.Samples
         #region //Interface specific
         public string GetTreeName()
         {
-            return name;
+            return "UI Tracker";
         }
 
         public IEnumerable<ITreeNodeViewer> GetAllNodes()
         {
-            List<UIBaseState> allChildren = new List<UIBaseState>(root.GetAllChildren());
-            allChildren.Insert(0, root);
-            return allChildren;
+            if(root != null)
+            {
+                List<UIBaseState> allChildren = new List<UIBaseState>(root.GetAllChildren());
+                allChildren.Insert(0, root);
+                return allChildren;
+            }
+            else
+            {
+                return null;
+            }
         }
         #endregion
     }

@@ -11,6 +11,7 @@ namespace JZ.TreeViewer.Editor
     /// </summary>
     public class TNodeBlock : VisualElement
     {
+        public static TNodeBlock currentRoot { get; private set; }
         private VisualTreeAsset sourceTree;
         private VisualElement actualBlock; //First child under this and the source of the uxml tree
         private ITreeNodeViewer myNode;
@@ -21,10 +22,9 @@ namespace JZ.TreeViewer.Editor
         private List<TNodeBlock> childBlocks = new List<TNodeBlock>();
         private Button childButton;
         private bool showingChildren = true;
-        private string blockName;
 
         #region //Set up
-        public TNodeBlock(ITreeNodeViewer myNode, TreeSettingManager settingManager, int nameCount)
+        public TNodeBlock(ITreeNodeViewer myNode, TreeSettingManager settingManager, bool isRoot, int nameCount)
         {
             //Create tree and set up styles
             this.SetUxmlAndUss("Tree Viewer uxml and uss", "NodeBlock.uxml", "Tree Viewer Tool Style.uss");
@@ -33,18 +33,29 @@ namespace JZ.TreeViewer.Editor
             actualBlock = this[0]; //Gets the first child
             generateVisualContent += OnGenerateVisualContent;
 
+            //Set up root
+            if(isRoot)
+            {
+                currentRoot = this;
+            }
+            else
+            {
+                AddDragAndDrop();
+            }
+
+
             //Set up context menu
             this.AddManipulator(new ContextualMenuManipulator(GenerateContextMenu));
 
             //Set up node parameters
             this.myNode = myNode;
             Label nodeName = this.Q<Label>("node-name");
-            blockName = myNode.GetNodeName();
-            if(nameCount > 1)
+            name = myNode.GetNodeName();
+            if(nameCount > 0)
             {
-                blockName += $" {nameCount}";
+                name += $" {nameCount + 1}";
             }
-            nodeName.text = blockName;
+            nodeName.text = name;
 
             //Set up show/hide button
             childButton = this.Q<Button>("show-child");
@@ -62,11 +73,16 @@ namespace JZ.TreeViewer.Editor
             evt.menu.AppendAction("Reset Child Positions", ResetChildren);
         }
 
-        public void AddDragAndDrop()
+        private void AddDragAndDrop()
         {
             dragAndDrop = new DragAndDropManipulator(this);
             dragAndDrop.OnDrag += RepaintParent;
             this.AddManipulator(dragAndDrop);
+        }
+
+        public bool SharesNameWith(string otherName)
+        {
+            return myNode.GetNodeName() == otherName || name == otherName;
         }
         #endregion
 
@@ -124,6 +140,13 @@ namespace JZ.TreeViewer.Editor
             }
             
             return count;
+        }
+
+        /// <param name="block"></param>
+        /// <returns>If this block is a child of the parameter block</returns>
+        public bool IsChildOf(TNodeBlock block)
+        {
+            return myNode.IsChildOf(block.myNode);
         }
         #endregion
 
@@ -253,7 +276,7 @@ namespace JZ.TreeViewer.Editor
                 }
             }
 
-            return blockName;
+            return name;
         }
         #endregion
     
