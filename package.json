@@ -29,8 +29,8 @@
         "path": "Samples~/Behavior Tree"
       },
       {
-        "displayName": "Dialogue Tree",
-        "description": "Contains dialogue tree example.",
+        "displayName": "Simple Dialogue Tree",
+        "description": "Contains a simple dialogue tree example.",
         "path": "Samples~/Dialogue Tree"
       },
       {
